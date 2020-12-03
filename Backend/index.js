@@ -23,8 +23,9 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING,{
 })
 
 
+//routes
 
-
+app.use("/users",require("./routes/userRoutes"))
 
 
 
