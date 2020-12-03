@@ -1,4 +1,5 @@
 const bcrypt =require("bcryptjs")
+const jwt =require("jsonwebtoken")
 
 const router =require("express").Router();
 const User =require("../models/userModel")
@@ -50,12 +51,30 @@ router.post("/login",async(req,res)=>{
 
     //validate
     if(!email || !password)
-    return res.status(400).json({msg:"Please Enter the correct email/password"});
+        return res.status(400).json({msg:"Please Enter the correct email/password"});
 
-    const user =await User.findOne({email:email})
-    if(!user)
-    return res.status(400).json({msg:"Email doesnot exist"});
-   }catch(err){
+            const user =await User.findOne({email:email})
+              if(!user)
+         return res.status(400).json({msg:"Email doesnot exist"});
+         //checkLogin
+         const isMatch =await bcrypt.compare(password,user.password);
+         if(!isMatch)
+         {
+             return res.status(400).json({msg:"Invalid Credentials"});
+
+         }
+         const token =jwt.sign({id:user._id},process.env.JWT_SECRET);
+        res.json({
+            token,
+            user:{
+                id:user._id,
+                displayName:user.displayName,
+                email:user.email,
+
+            },
+        })
+     }
+   catch(err){
     res.status(500).json({error:err.message});
 
 }
