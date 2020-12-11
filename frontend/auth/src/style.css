@@ -4,6 +4,7 @@
   margin:0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 1.2rem;
 }
 a{
   color :#2199df;
@@ -20,4 +21,52 @@ button,input[type="submit"]{
   color: unset;
   cursor: pointer;
 
+
+}
+h1,h2,h3,h4,h4,ol,ul{
+  margin:1em;
+}
+
+body{
+  font-family: "Roboto",sans-serif;
+}
+#header{
+  display:flex;
+  background-color: rgb(243, 255, 133);
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+#header.title{
+  margin:0;
+  padding: 0 1rem;
+
+}
+#header.authoptions {
+height: 100%;
+display: flex;
+}
+#header .authoptions button{
+  padding: 0 1rem;
+  color :#2199df;  
+  backface-visibility: visible;
+ font-weight: bold;
+ font-size: 1rem;
+
+
+
+
+}
+#header .authoptions button:hover{
+  background-color: #f0e770;
+ 
+}
+@media screen and (max-width:550px){
+  #header.title{
+    font-size: 1.2rem;
+  }
+  header .authoptions :button{
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+  }
 }
