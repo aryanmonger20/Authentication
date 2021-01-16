@@ -1,11 +1,21 @@
-import React ,{useState}from 'react'
+import React ,{useState,useContext}from 'react'
 import {useHistory} from "react-router-dom";
+import Axios from "axios"
+import UserContext from "../../context/UserContext"
 
 export default function Register() {
     const[email,setEmail]=useState();
     const [password,setPassword]=useState();
     const [passwordCheck,setPasswordCheck]=useState();
     const [displayName,setDisplayName]=useState();
+    const {setUserData}=useContext(UserContext)
+
+    const submit =async(e)=>{
+        e.preventDefault();
+        const newUser={email,password,passwordCheck,displayName};
+        const registerRes=await Axios.post("http://localhost:5000/users/register",  newUser)
+      
+    }
 
     return (
         <div className="page">
